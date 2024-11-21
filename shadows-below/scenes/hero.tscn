@@ -1,10 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://bqph2sa7488bu"]
+[gd_scene load_steps=44 format=3 uid="uid://bqph2sa7488bu"]
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_lhjda"]
 [ext_resource type="Texture2D" uid="uid://dttf4dqx425uk" path="res://assets/Soldier/Soldier/Soldier-Attack01.png" id="1_o5bnl"]
 [ext_resource type="Texture2D" uid="uid://cv4ifo5r5sdoa" path="res://assets/Soldier/Soldier/Soldier-Attack02.png" id="2_aofxu"]
 [ext_resource type="Texture2D" uid="uid://lxb8vkplrpdt" path="res://assets/Soldier/Soldier/Soldier-Death.png" id="3_sq0vg"]
 [ext_resource type="Texture2D" uid="uid://4k0ukgt1s06n" path="res://assets/Soldier/Soldier/Soldier-Idle.png" id="4_fydm5"]
+[ext_resource type="Texture2D" uid="uid://ct0fehxavv3ek" path="res://assets/Soldier/Soldier/Soldier-Hurt.png" id="5_fhou5"]
 [ext_resource type="Texture2D" uid="uid://do61h0eb5vnmb" path="res://assets/Soldier/Soldier/Soldier-Walk.png" id="5_kghhe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncgtm"]
@@ -69,6 +70,22 @@ region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nhnk"]
 atlas = ExtResource("3_sq0vg")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hxv5"]
+atlas = ExtResource("5_fhou5")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guqia"]
+atlas = ExtResource("5_fhou5")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wobfw"]
+atlas = ExtResource("5_fhou5")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwx07"]
+atlas = ExtResource("5_fhou5")
 region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isc7c"]
@@ -194,6 +211,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7hxv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guqia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wobfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwx07")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_isc7c")
 }, {
 "duration": 1.0,
@@ -246,21 +280,20 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ipl8"]
-radius = 4.0
+radius = 5.0
 
 [node name="hero" type="CharacterBody2D"]
 y_sort_enabled = true
-collision_layer = 4
-collision_mask = 3
+collision_layer = 5
 script = ExtResource("1_lhjda")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_as0ks")
-animation = &"idle"
-frame_progress = 0.914465
+animation = &"hurt"
+frame_progress = 0.301046
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_1ipl8")
 
 [node name="deal_attack_timer" type="Timer" parent="."]

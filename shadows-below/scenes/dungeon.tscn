@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://cdkgudakiiwtu"]
+[gd_scene load_steps=13 format=4 uid="uid://cdkgudakiiwtu"]
 
 [ext_resource type="Texture2D" uid="uid://bdyx7h4u75jin" path="res://assets/character and tileset/Dungeon_Tileset.png" id="1_fjne3"]
 [ext_resource type="Texture2D" uid="uid://d3ksycxju2i5w" path="res://assets/character and tileset/demonstration.png" id="2_uh81t"]
 [ext_resource type="PackedScene" uid="uid://bqph2sa7488bu" path="res://scenes/hero.tscn" id="3_b4iwv"]
 [ext_resource type="PackedScene" uid="uid://opos1aju41gk" path="res://scenes/damage_power_up.tscn" id="4_sjyqq"]
+[ext_resource type="PackedScene" uid="uid://civ2bq053kw7s" path="res://scenes/health_power_up.tscn" id="5_uauom"]
+[ext_resource type="PackedScene" uid="uid://cxvwpkvxhwqdv" path="res://scenes/heal_power_up.tscn" id="6_8sunu"]
+[ext_resource type="PackedScene" uid="uid://2kgbljbick46" path="res://scenes/enemy.tscn" id="7_yt4nh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8ajh"]
 texture = ExtResource("1_fjne3")
@@ -269,5 +272,14 @@ zoom = Vector2(6, 6)
 
 [node name="damage_power_up" parent="Node2D" instance=ExtResource("4_sjyqq")]
 position = Vector2(-24, 22)
+
+[node name="health_power_up" parent="Node2D" instance=ExtResource("5_uauom")]
+position = Vector2(24, 21)
+
+[node name="heal_power_up" parent="Node2D" instance=ExtResource("6_8sunu")]
+position = Vector2(71, 23)
+
+[node name="enemy" parent="Node2D" instance=ExtResource("7_yt4nh")]
+position = Vector2(102, 23)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

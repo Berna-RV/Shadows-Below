@@ -25,7 +25,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	else:
 		print("It's not the hero.")
 
-
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == hero_body:
 		print("Hero left the area.")

@@ -13,6 +13,8 @@ var hero_alive = true
 
 var ATTACK_DAMAGE = 20
 
+var is_hero_attacking = false
+
 # identifier function
 func hero():
 	pass
@@ -37,9 +39,10 @@ func handle_movement_and_attack(delta):
 		if direction != Vector2.ZERO:
 			last_direction = direction
 			
-			if Input.is_action_just_pressed("attack") and HERO_ACTION_READY:
+			if Input.is_action_just_pressed("attack") and HERO_ACTION_READY and !is_hero_attacking:
 				$AnimatedSprite2D.play("attack2")  # Play the attack animation
 				HERO_ACTION_READY = false
+				is_hero_attacking = true
 				$deal_attack_timer.start()
 				# start timer 
 			else:
@@ -47,9 +50,10 @@ func handle_movement_and_attack(delta):
 			# Flip sprite horizontally based on left/right movement
 			$AnimatedSprite2D.flip_h = last_direction.x < 0
 		else:
-			if Input.is_action_just_pressed("attack") and HERO_ACTION_READY:
+			if Input.is_action_just_pressed("attack") and HERO_ACTION_READY and !is_hero_attacking:
 				$AnimatedSprite2D.play("attack1")  # Play the attack animation
 				HERO_ACTION_READY = false
+				is_hero_attacking = true
 				$deal_attack_timer.start()
 				# start timer 
 			else:
@@ -60,6 +64,7 @@ func handle_movement_and_attack(delta):
 func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
 	HERO_ACTION_READY = true
+	is_hero_attacking = false
 
 func attack_damage_power_up(power_up):
 	ATTACK_DAMAGE += power_up
@@ -67,9 +72,11 @@ func attack_damage_power_up(power_up):
 	
 func health_power_up(power_up):
 	MAX_HEALTH += power_up
+	print("health power up")
 
 func heal_power_up(power_up):
 	if HEALTH + power_up >= MAX_HEALTH:
 		HEALTH = MAX_HEALTH
 	else:
 		HEALTH += power_up
+	print("heal power up")

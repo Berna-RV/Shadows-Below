@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxvwpkvxhwqdv"]
+
+[ext_resource type="Texture2D" uid="uid://dkcbuvn0bj6dh" path="res://assets/items and trap_animation/flasks/flasks_1_1.png" id="1_a2ip5"]
+[ext_resource type="Script" path="res://scripts/heal_power_up.gd" id="1_spcwm"]
+[ext_resource type="Texture2D" uid="uid://b8lppch7xvf5a" path="res://assets/items and trap_animation/flasks/flasks_1_2.png" id="2_01h71"]
+[ext_resource type="Texture2D" uid="uid://c718wqfa1yuxt" path="res://assets/items and trap_animation/flasks/flasks_1_3.png" id="3_82lbe"]
+[ext_resource type="Texture2D" uid="uid://cd28clsf8es56" path="res://assets/items and trap_animation/flasks/flasks_1_4.png" id="4_c8te7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eabl"]
+atlas = ExtResource("1_a2ip5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ls5j"]
+atlas = ExtResource("2_01h71")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uml5l"]
+atlas = ExtResource("3_82lbe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i435i"]
+atlas = ExtResource("4_c8te7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yfj2g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eabl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ls5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uml5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i435i")
+}],
+"loop": true,
+"name": &"waiting_for_pickup",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drysh"]
+radius = 3.16228
+
+[node name="heal_power_up" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_spcwm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yfj2g")
+animation = &"waiting_for_pickup"
+autoplay = "waiting_for_pickup"
+frame_progress = 0.427602
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_drysh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
