@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bqph2sa7488bu"]
+[gd_scene load_steps=45 format=3 uid="uid://bqph2sa7488bu"]
 
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_lhjda"]
 [ext_resource type="Texture2D" uid="uid://dttf4dqx425uk" path="res://assets/Soldier/Soldier/Soldier-Attack01.png" id="1_o5bnl"]
@@ -207,7 +207,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
-"speed": 6.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,15 +282,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ipl8"]
 radius = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw3tn"]
+radius = 8.0
+
 [node name="hero" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 5
+collision_mask = 3
 script = ExtResource("1_lhjda")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_as0ks")
-animation = &"hurt"
-frame_progress = 0.301046
+animation = &"idle"
+frame_progress = 0.745574
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -298,4 +302,32 @@ shape = SubResource("CircleShape2D_1ipl8")
 
 [node name="deal_attack_timer" type="Timer" parent="."]
 
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_yw3tn")
+
+[node name="damage_cool_down" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="hurt_animation_time" type="Timer" parent="."]
+wait_time = 1.509
+
+[node name="death_time" type="Timer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0.00392157, 0.0235294, 1)
+offset_left = -9.0
+offset_top = -16.0
+offset_right = 171.0
+offset_bottom = 11.0
+scale = Vector2(0.1, 0.1)
+value = 100.0
+show_percentage = false
+
 [connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="damage_cool_down" to="." method="_on_damage_cool_down_timeout"]
+[connection signal="timeout" from="hurt_animation_time" to="." method="_on_hurt_animation_time_timeout"]
+[connection signal="timeout" from="death_time" to="." method="_on_death_time_timeout"]

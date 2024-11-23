@@ -17,17 +17,13 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.play("opened_chest")
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("body entered")
 	if body.has_method("hero"):
-		print("It's the hero!")
+		print("Press \"E\" to open the chest!!")
 		is_hero_near = true
 		hero_body = body  # Save the hero reference
-	else:
-		print("It's not the hero.")
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == hero_body:
-		print("Hero left the area.")
 		is_hero_near = false
 		hero_body = null  # Clear the hero reference
 

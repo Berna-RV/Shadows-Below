@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://j4pscpcccfjt"]
+
+[ext_resource type="Script" path="res://scripts/holy_fire.gd" id="1_7tob0"]
+[ext_resource type="Texture2D" uid="uid://df6js2oweicrl" path="res://assets/items and trap_animation/torch/candlestick_2_1.png" id="1_fneum"]
+[ext_resource type="Texture2D" uid="uid://dpwdjfld8bgk3" path="res://assets/items and trap_animation/torch/candlestick_2_2.png" id="2_10qqp"]
+[ext_resource type="Texture2D" uid="uid://blf0sy0q7fo6o" path="res://assets/items and trap_animation/torch/candlestick_2_3.png" id="3_1r5w6"]
+[ext_resource type="Texture2D" uid="uid://4h548enufrxv" path="res://assets/items and trap_animation/torch/candlestick_2_4.png" id="4_wcd2w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fuefv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fneum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_10qqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1r5w6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wcd2w")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjkca"]
+radius = 9.0
+
+[node name="Holy fire" type="Node2D"]
+script = ExtResource("1_7tob0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fuefv")
+animation = &"burn"
+autoplay = "burn"
+frame_progress = 0.680117
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xjkca")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
